@@ -2,29 +2,44 @@
 #include <stdlib.h>
 #include <time.h>
 
+int *norep();
+
 int main(void)
 {
     srand(time(NULL));
+    int a=0,b=0;
+    for(b=0;b<100;b++)
+    {
+        int *rep=norep();
+        for(a=0;a<6;a++)
+            printf("%d", rep[a]);
+        printf("\n");
+    }
+    return EXIT_SUCCESS;
 }
 
-int norep()
+int *norep()
 {
-    int i,j;
+    int i,j=0;
+    int *vetor=(int *) calloc (6, sizeof (int));
     do
     {
-        int x,y=1,z;
-        int vetor[6];
-        for(x=y;x>0;x--)
+        int x,y=1;
+        i=rand()%6+1;
+        for(x=0;x<6;x++)
         {
-            i=rand()%6+1;
             if(i==vetor[x])
-                break;
-            else
             {
-                vetor[x]=i;
-                y++;
+                y=0;
+                break;
             }
+
         }
-    }while(y<6);
-    return vetor[x];
+        if(y==1)
+        {
+            vetor[j]=i;
+            j++;        
+        }
+    }while(j<6);
+    return vetor;
 }
